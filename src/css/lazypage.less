@@ -1,0 +1,212 @@
+.lazypage {
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  &.out {
+    display: none;
+  }
+  &.in,
+  &.out {
+    animation-fill-mode: both;
+  }
+  &.slide {
+    &.in,
+    &.out {
+      animation-timing-function: ease-out;
+      animation-duration: 225ms;
+    }
+    &.in {
+      animation-name: slideinfromright;
+    }
+    &.out {
+      animation-name: slideouttoleft;
+    }
+    &.reverse {
+      &.in {
+        animation-name: slideinfromleft;
+      }
+      &.out {
+        animation-name: slideouttoright;
+      }
+    }
+  }
+  &.slidevertical {
+    &.in,
+    &.out {
+      animation-timing-function: ease-out;
+      animation-duration: 225ms;
+    }
+    &.in {
+      animation-name: slideinfrombottom;
+    }
+    &.out {
+      animation-name: slideouttotop;
+    }
+    &.reverse {
+      &.in {
+        animation-name: slideinfromtop;
+      }
+      &.out {
+        animation-name: slideouttobottom;
+      }
+    }
+  }
+  &.fade {
+    &.in,
+    &.out {
+      animation-timing-function: ease-out;
+      animation-duration: 400ms;
+    }
+    &.in {
+      animation-name: fadein;
+    }
+    &.out {
+      animation-name: fadeout;
+    }
+  }
+  &.popup {
+    &.in,
+    &.out {
+      animation-timing-function: ease-out;
+      animation-duration: 225ms;
+    }
+    &.in {
+      animation-name: slideinfrombottom;
+      &:not(.reverse) {
+        z-index: 8;
+      }
+    }
+    &.out {
+      animation-name: withoutanimate;
+    }
+    &.reverse {
+      &.in {
+        animation-name: withoutanimate;
+      }
+      &.out {
+        animation-name: slideouttobottom;
+        z-index: 8;
+      }
+    }
+  }
+}
+
+@keyframes slideinfromright {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+@keyframes slideinfromleft {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+@keyframes slideouttoleft {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+@keyframes slideouttoright {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes slideinfrombottom {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+@keyframes slideinfromtop {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+@keyframes slideouttotop {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-100%);
+  }
+}
+@keyframes slideouttobottom {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(100%);
+  }
+}
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes fadeout {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+@keyframes withoutanimate {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+.lazypage-loading-mask {
+  height: 100%;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.35);
+  position: relative;
+  left: 0;
+  top: 0;
+  z-index: 9;
+  &::after {
+    content: ' ';
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    top: calc(50% - 15px);
+    right: calc(50% - 15px);
+    background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTU3MTI2NzA2Njk4IiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDUwIDUwIiB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgcC1pZD0iMTA5NCIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIj4NCgk8ZGVmcz4NCgk8bGluZWFyR3JhZGllbnQgaWQ9ImxpbmVhciIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMCUiPg0KCSA8c3RvcCBvZmZzZXQ9IjAlIiAgIHN0b3AtY29sb3I9IiMwMDAiIHN0b3Atb3BhY2l0eT0iMS4wIiAvPg0KCSA8c3RvcCBvZmZzZXQ9IjkwJSIgc3RvcC1jb2xvcj0iIzAwMCIgc3RvcC1vcGFjaXR5PSIwIiAvPg0KCTwvbGluZWFyR3JhZGllbnQ+DQoJPC9kZWZzPg0KCTxjaXJjbGUgY3g9IjI1IiBjeT0iMjUiIHI9IjIwIiBzdHJva2Utd2lkdGg9IjUiIHN0cm9rZT0idXJsKCNsaW5lYXIpIiBmaWxsPSJub25lIiAvPg0KPC9zdmc+);
+    background-size: contain;
+    animation: busy-spin 1s linear infinite;
+  }
+}
+@keyframes busy-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

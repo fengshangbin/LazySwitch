@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0"
+    />
+    <block>
+      <% var path= !$path(0)||$path(0)=="" ? "a" : $path(0); %>
+      <title>{{ path }}</title>
+    </block>
+  </head>
+
+  <body>
+    <block src="/include/_nav.html"></block>
+    <block>
+      <% var path= !$path(0)||$path(0)=="" ? "a" : $path(0); %>
+      <div class="conatiner">
+        <div
+          :class="'lazypage default '+(path=='a'?'in':'out')"
+          data-page="a"
+          data-animate="slide"
+          data-title="a"
+        >
+          <style>
+            .conatiner [data-page="a"] {
+              background: green;
+            }
+          </style>
+          a
+        </div>
+        <div
+          :class="'lazypage '+(path=='b'?'in':'out')"
+          data-page="b"
+          data-animate="fade"
+          data-title="b"
+        >
+          <style>
+            .conatiner [data-page="b"] {
+              background: blue;
+            }
+          </style>
+          b
+        </div>
+        <div
+          :class="'lazypage '+(path=='c'?'in':'out')"
+          data-page="c"
+          data-animate="popup"
+          data-title="c"
+        >
+          <style>
+            .conatiner [data-page="c"] {
+              background: red;
+            }
+          </style>
+          c
+        </div>
+      </div>
+    </block>
+    <script>
+      LazyPage.openPreLoad();
+    </script>
+  </body>
+</html>

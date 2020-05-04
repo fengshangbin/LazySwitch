@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0"
+    />
+    <block>
+      <% var path= !$path(1)||$path(1)=="" ? "1" : $path(1); %>
+      <title>{{ $path(0) + '-' + path }}</title>
+    </block>
+  </head>
+  <body>
+    <block src="/include/_nav.html"></block>
+    <block>
+      <% var path= !$path(1)||$path(1)=="" ? "1" : $path(1); %>
+      <div class="conatiner">
+        <div class="lazypage in" :data-page="$path(0)" :data-sort="$path(0)">
+          <div
+            :class="'lazypage in '+(path=='1'?'default':'')"
+            :data-page="path"
+            data-animate="slidevertical"
+            :data-sort="path"
+          >
+            <style>
+              .conatiner [data-page="{{$path(0)}}"] [data-page="{{path}}"] {
+                background: <%= "rgb(" + Math.floor(Math.random() * 256) + "," +
+                  Math.floor(Math.random() * 256) + "," +
+                  Math.floor(Math.random() * 256) + ")" %>;
+              }
+            </style>
+            <script>
+              console.log("{{ $path(0)+" - "+path }}");
+            </script>
+            {{ $path(0) + '-' + path }}
+          </div>
+        </div>
+      </div>
+    </block>
+    <script>
+      LazyPage.addEventListener(LazyPage.PageEvent.PAGE_FIRST_IN, test);
+      LazyPage.addEventListener(LazyPage.PageEvent.PAGE_IN_START, test);
+      LazyPage.addEventListener(LazyPage.PageEvent.PAGE_IN_END, test);
+      LazyPage.addEventListener(LazyPage.PageEvent.PAGE_OUT_START, test);
+      LazyPage.addEventListener(LazyPage.PageEvent.PAGE_OUT_END, test);
+      function test(e) {
+        console.log(e);
+      }
+    </script>
+  </body>
+</html>
