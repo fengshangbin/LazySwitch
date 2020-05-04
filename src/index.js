@@ -1,6 +1,6 @@
 import "./css/lazypage.less";
 import "./lib/default";
-import { goto as gotoInner, openPreLoad } from "./lib/route";
+import { goto as gotoInner, openPreLoad, closePreLoad } from "./lib/route";
 //import { extend } from './lib/utils';
 export function goto(url, history) {
   /* options = extend(
