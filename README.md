@@ -1,6 +1,6 @@
 # LazyPage-switch
 
-LazyPage-switch 让多页也可以像但也一样做页面切换动画  
+LazyPage-switch 让多页也可以像单页一样做页面切换动画  
 GitHub Pages: [https://github.com/fengshangbin/LazyPage-switch](https://github.com/fengshangbin/LazyPage-switch)
 
 # 关于 LazyPage
