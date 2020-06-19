@@ -7,19 +7,23 @@
     padding-left: 0;
     list-style-type: none;
   }
-  ul li:first-child {
+
+  .title {
     font-weight: bold;
     font-size: 20px;
     margin-bottom: 5px;
   }
-  ul li:first-child a {
+
+  .title a {
     color: #333;
   }
+
   a {
     line-height: 16px;
     text-decoration: none;
     color: #666;
   }
+
   .conatiner {
     width: 300px;
     height: 300px;
@@ -33,19 +37,17 @@
 </style>
 <% var root = $config.root %>
 <ul>
-  <li><a href="https://www.fengshangbin.com" data-direct="true">blog</a></li>
-  <li><a :href="root+'/a'">a (slide)</a></li>
+  <li class="title"><a href="https://www.fengshangbin.com">blog</a></li>
+  <li><a :href="root+'/'">a (slide)</a></li>
   <li><a :href="root+'/b'">b (fade)</a></li>
   <li><a :href="root+'/c'">c (pop)</a></li>
 </ul>
 <ul>
-  <li><a :href="root+'/1/'">1</a></li>
   <li><a :href="root+'/1/1'">1/1</a></li>
   <li><a :href="root+'/1/2'">1/2</a></li>
   <li><a :href="root+'/1/3'">1/3</a></li>
 </ul>
 <ul>
-  <li><a :href="root+'/2/'">2</a></li>
   <li><a :href="root+'/2/1'">2/1</a></li>
   <li><a :href="root+'/2/2'">2/2</a></li>
   <li><a :href="root+'/2/3'" data-history="false">2/3 (no history)</a></li>
