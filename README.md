@@ -78,15 +78,13 @@ css 类 lazypage 代表当前为一个页面单元, 属性 data-page 为该页�
 如 news+\$-.html
 
 ```
-<script type="x-tmpl-lazypage">
-	<div class="lazypage in" data-page="news">
-		...
-		<div class="lazypage <%={$0}=="2019"?"in":"out"%>" data-page="2019">2019</div>
-		<div class="lazypage <%={$0}=="2018"?"in":"out"%>" data-page="2018">2018</div>
-		<div class="lazypage <%={$0}=="2017"?"in":"out"%>" data-page="2017">2017</div>
-		...
-	</div>
-</script>
+<div class="lazypage in" data-page="news">
+	...
+	<div class="lazypage in" data-page="2019">2019</div>
+	<div class="lazypage out" data-page="2018">2018</div>
+	<div class="lazypage out" data-page="2017">2017</div>
+	...
+</div>
 ```
 
 同级页面只能有一个 lazypage 元素是展示状态 CSS 样式 in，其他 lazypage 的 css 样式为 out
@@ -247,13 +245,11 @@ history: 是否产生浏览器历史纪录,如没有此参数则默认为 true
 如 news+\$-.html
 
 ```
-<script type="x-tmpl-lazypage">
-	<div class="lazypage in" data-page="news">
-		...
-		<div class="lazypage <%={$0}=="2019"?"in":"out"%>" data-page="2019" data-title="2019">2019</div>
-		<div class="lazypage <%={$0}=="2018"?"in":"out"%>" data-page="2018" data-title="2018">2018</div>
-		<div class="lazypage <%={$0}=="2017"?"in":"out"%>" data-page="2017" data-title="2017">2017</div>
-		...
-	</div>
-</script>
+<div class="lazypage in" data-page="news">
+	...
+	<div class="lazypage in" data-page="2019" data-title="2019">2019</div>
+	<div class="lazypage out" data-page="2018" data-title="2018">2018</div>
+	<div class="lazypage out" data-page="2017" data-title="2017">2017</div>
+	...
+</div>
 ```
