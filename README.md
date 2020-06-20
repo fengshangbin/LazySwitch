@@ -18,7 +18,7 @@ LazyPage 是一个 js 插件，实现页面切换的各种动画。
 
 # 在线示例
 
-[https://www.fengshangbin.com/node/lazypage/switchpage/](https://www.fengshangbin.com/node/lazypage/switchpage/)
+[https://www.fengshangbin.com/node/lazypage-switch/](https://www.fengshangbin.com/node/lazypage-switch/)
 
 # 如何使用
 
@@ -36,7 +36,8 @@ LazyPage 是一个 js 插件，实现页面切换的各种动画。
 <script src="js/lazypage-switch.js"></script>
 ```
 
-给执行切换动画的单元添加class="lazypage"
+给执行切换动画的单元添加 class="lazypage"
+
 ```
 <div class="lazypage">
 	...
@@ -45,16 +46,17 @@ LazyPage 是一个 js 插件，实现页面切换的各种动画。
 
 ### 3. 单页面存在多个单元
 
-如 $.html
+如 \$.html
 
 ```
 <div class="lazypage in" data-path="/2019.html">2019</div>
 <div class="lazypage out" data-path="/2018.html">2018</div>
 <div class="lazypage out" data-path="/2017.html">2017</div>
 ```
+
 多单元只能有一个 lazypage 元素是展示状态 CSS 样式 in，其他 lazypage 的 css 样式为 out  
 每个单元需要配置对应的路径属性 data-path="xxx"  
-同时需要把URL domain/2019.html, domain/2019.html, domain/2019.html的访问指向这个单页面html文件，这需要后台语言的支持，也可以结合LazyPage使用，让前端也可设置访问URL  
+同时需要把 URL domain/2019.html, domain/2019.html, domain/2019.html 的访问指向这个单页面 html 文件，这需要后台语言的支持，也可以结合 LazyPage 使用，让前端也可设置访问 URL  
 关于 LazyPage, 参见 https://github.com/fengshangbin/LazyPage
 
 ### 4. 页面切换动画
@@ -147,7 +149,7 @@ loading 动画默认开启
 </script>
 ```
 
-开启预加载后 会自动查找 DOM 中的 a 标签的超链接，预加载这些超链接对应的页面  
+开启预加载后 会自动查找 DOM 中的 a 标签的超链接，预加载这些超链接对应的页面
 
 关闭
 
@@ -181,9 +183,8 @@ event.data.page 当前事件对应的页面单元
 event.data.animate 页面切换动画类型  
 event.data.history 页面切换是否产生浏览器历史纪录  
 event.data.isBack 页面切换动画是否反转  
-对于PAGE_SWITCH_BEFORE事件没有event.data.page,   
-但是多了event.data.from和event.data.to对应将要出场和进场的页面单元
-
+对于 PAGE_SWITCH_BEFORE 事件没有 event.data.page,  
+但是多了 event.data.from 和 event.data.to 对应将要出场和进场的页面单元
 
 ### 10. 动态调用页面切换
 
@@ -201,16 +202,16 @@ url: 跳转目标地址
 option: 跳转配置项  
 默认值为
 {
-    history: true,
-    isBack: "auto",
-    animate: "auto",
+history: true,
+isBack: "auto",
+animate: "auto",
 }
 
 ### 11. 页面标题
 
 如果一个 html 文件中只有唯一一个页面单元时，这个页面单元会自动继承该页面的 title 值，  
 如果有多个页面单元时 需要设置每个页面单元的标题 data-title  
-如 $.html
+如 \$.html
 
 ```
 <div class="lazypage in" data-path="/2019.html" data-title="2019">2019</div>
