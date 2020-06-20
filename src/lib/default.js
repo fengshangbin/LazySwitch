@@ -1,8 +1,9 @@
 import { pop } from "./history";
-import { goto, lastPath } from "./route";
-import { getFinalPage } from "./element";
+import { goto } from "./route";
+import { getElementByPath, setElementPath } from "./element";
 import ready from "./documentReady";
 import { pageIn } from "./animate";
+import { getPath, changeTitle } from "./utils";
 
 document.addEventListener("click", function (event) {
   //event.preventDefault();
@@ -21,29 +22,43 @@ document.addEventListener("click", function (event) {
   if (target.getAttribute("data-direct") == "true") {
     return false;
   }
-  //var animate = target.getAttribute('data-animate') || 'auto';
-  //var isBack = target.getAttribute('data-back') || 'auto';
   var history = target.getAttribute("data-history") || "true";
   var state = goto(href, {
     history: history === "true",
     isBack: "auto",
     animate: "auto",
   });
-  if (state) event.preventDefault();
+  if (state)
+    event.preventDefault();
 });
+
 window.onpopstate = function () {
   var options = pop();
-  //if (options) {
   goto(location.href, options);
-  /* } else {
-    location.reload();
-  } */
 };
+
 ready(function () {
-  var currentLazyPage = getFinalPage(document.body);
-  if (currentLazyPage) {
-    currentLazyPage.setAttribute("data-title", document.title);
-    pageIn(currentLazyPage, {
+  var targetPath = getPath(location.href);
+  var targetLazyPage = getElementByPath(targetPath);
+
+  var currentLazyPage = document.querySelector(".lazypage.in") || document.querySelector(".lazypage");
+
+  if (targetLazyPage == null && currentLazyPage == null) return;
+  else {
+    if (targetLazyPage == null) {
+      targetLazyPage = currentLazyPage;
+      setElementPath(currentLazyPage, targetPath);
+    }
+    if (targetLazyPage != currentLazyPage && currentLazyPage != null) {
+      currentLazyPage.classList.remove('in');
+      currentLazyPage.classList.add('out');
+    }
+    if (targetLazyPage.hasAttribute("data-title")) {
+      changeTitle(targetLazyPage.getAttribute("data-title"));
+    } else {
+      targetLazyPage.setAttribute("data-title", document.title);
+    }
+    pageIn(targetLazyPage, {
       isBack: false,
       animate: "onPageLoadShow",
     });

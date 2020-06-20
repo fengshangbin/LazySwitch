@@ -28,7 +28,9 @@ export function push(targetPath, options) {
     window.history.pushState(historyItem, null, targetPath);
     //console.log(preHistory, historyItem);
     preHistory = historyItem;
-  }
+  }/* else{
+    window.history.replaceState(preHistory, null, targetPath);
+  } */
 }
 
 export function pop() {
