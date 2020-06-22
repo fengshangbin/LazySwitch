@@ -5,22 +5,22 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
   entry: {
-    "lazypage-switch": ["./src/index.js"],
+    "lazyswitch": ["./src/index.js"],
   },
   plugins: [
     new CleanWebpackPlugin(["dist"]),
     new webpack.BannerPlugin(
-      " lazypage-switch \n by fengshangbin 2019-01-10 \n https://github.com/fengshangbin/LazyPage-switch \n for H5 page switch animation"
+      " lazyswitch \n by fengshangbin 2019-01-10 \n https://github.com/fengshangbin/lazyswitch \n for H5 page switch animation"
     ),
     new MiniCssExtractPlugin({
-      filename: "lazypage-switch.css",
+      filename: "lazyswitch.css",
     }),
   ],
   output: {
     path: path.resolve(__dirname, "dist"),
     publicPath: "/dist/",
     filename: "[name].js",
-    library: "LazyPage",
+    library: "LazySwitch",
     libraryTarget: "umd",
   },
   devServer: {

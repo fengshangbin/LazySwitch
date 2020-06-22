@@ -1,7 +1,7 @@
 var ignorePath = "2";
 
 export function getElementByPath(path) {
-  return document.querySelector(".lazypage[data-path=\"" + replacePath(path) + "\"]");
+  return document.querySelector(".lazyswitch[data-path=\"" + replacePath(path) + "\"]");
 }
 
 export function setElementPath(element, path) {

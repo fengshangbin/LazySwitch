@@ -7,23 +7,23 @@ import ready from "./documentReady";
 
 /* loading动画 */
 var needLoading = true;
-export function addLoading(lazypage) {
+export function addLoading(lazyswitch) {
     if (!needLoading) return;
-    var conatiner = lazypage.parentElement;
-    var loadingUI = conatiner.childrens("lazypage-loading-mask");
+    var conatiner = lazyswitch.parentElement;
+    var loadingUI = conatiner.childrens("lazyswitch-loading-mask");
     if (loadingUI.data.length > 0) {
         loadingUI.data[0].style.display = "block";
     } else {
         conatiner.insertAdjacentHTML(
             "beforeend",
-            '<div class="lazypage-loading-mask"></div>'
+            '<div class="lazyswitch-loading-mask"></div>'
         );
     }
 }
-export function removeLoading(lazypage) {
+export function removeLoading(lazyswitch) {
     if (!needLoading) return;
-    var conatiner = lazypage.parentElement;
-    var loadingUI = conatiner.childrens("lazypage-loading-mask");
+    var conatiner = lazyswitch.parentElement;
+    var loadingUI = conatiner.childrens("lazyswitch-loading-mask");
     if (loadingUI.data.length > 0) {
         loadingUI.data[0].style.display = "none";
     }
@@ -94,18 +94,18 @@ export function loadPage(url, callback) {
     ajax({
         url: url,
         success: function (data) {
-            targetPage = querySelectorElement(data, ".lazypage[data-path=\"" + targetPath + "\"]", false);
+            targetPage = querySelectorElement(data, ".lazyswitch[data-path=\"" + targetPath + "\"]", false);
             if (targetPage == null) {
-                targetPage = querySelectorElement(data, ".lazypage.in", false) || querySelectorElement(data, ".lazypage", false);
+                targetPage = querySelectorElement(data, ".lazyswitch.in", false) || querySelectorElement(data, ".lazyswitch", false);
             }
             if (targetPage != null) {
                 var addTarget;
                 var block = targetPage;
                 var group = /data-sort *= *"([0-9]*)"/i.exec(block);
                 var sort = group ? parseFloat(group[1]) : 0;
-                var current = document.querySelector(".lazypage.in");
+                var current = document.querySelector(".lazyswitch.in");
                 var container = current.parentElement;
-                var siblings = container.childrens("lazypage");
+                var siblings = container.childrens("lazyswitch");
                 for (var i = 0; i < siblings.data.length; i++) {
                     var item = siblings.data[i];
                     var itemSort = parseFloat(item.getAttribute("data-sort") || "0");
@@ -144,10 +144,10 @@ export function loadPage(url, callback) {
     });
 }
 
-function loadPageCallback(key, lazypage) {
+function loadPageCallback(key, lazyswitch) {
     var callbacks = ajaxPageHistory[key];
     for (var i = 0; i < callbacks.length; i++) {
-        if (callbacks[i]) callbacks[i](lazypage);
+        if (callbacks[i]) callbacks[i](lazyswitch);
     }
     ajaxPageHistory[key] = null;
 }

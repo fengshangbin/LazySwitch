@@ -15,7 +15,7 @@
   <block>
     <% var path= $path(1) || "1"; %>
     <div class="conatiner">
-      <div class="lazypage" :data-sort="$path(0)*10+path">
+      <div class="lazyswitch" :data-sort="$path(0)*10+path">
         <style>
           .conatiner [data-path="/{{$path(0)+'/'+path}}"] {
             background: <%="rgb("+ Math.floor(Math.random() * 256) + ","+ Math.floor(Math.random() * 256) + ","+ Math.floor(Math.random() * 256) + ")"%>;
@@ -29,15 +29,15 @@
     </div>
   </block>
   <script>
-    LazyPage.addEventListener(LazyPage.PageEvent.PAGE_SWITCH_BEFORE, test);
-    LazyPage.addEventListener(LazyPage.PageEvent.PAGE_FIRST_IN, test);
-    LazyPage.addEventListener(LazyPage.PageEvent.PAGE_IN_START, test);
-    LazyPage.addEventListener(LazyPage.PageEvent.PAGE_IN_END, test);
-    LazyPage.addEventListener(LazyPage.PageEvent.PAGE_OUT_START, test);
-    LazyPage.addEventListener(LazyPage.PageEvent.PAGE_OUT_END, test);
+    LazySwitch.addEventListener(LazySwitch.PageEvent.PAGE_SWITCH_BEFORE, test);
+    LazySwitch.addEventListener(LazySwitch.PageEvent.PAGE_FIRST_IN, test);
+    LazySwitch.addEventListener(LazySwitch.PageEvent.PAGE_IN_START, test);
+    LazySwitch.addEventListener(LazySwitch.PageEvent.PAGE_IN_END, test);
+    LazySwitch.addEventListener(LazySwitch.PageEvent.PAGE_OUT_START, test);
+    LazySwitch.addEventListener(LazySwitch.PageEvent.PAGE_OUT_END, test);
     function test(e) {
       console.log(e);
-      if (e.type == LazyPage.PageEvent.PAGE_SWITCH_BEFORE) {
+      if (e.type == LazySwitch.PageEvent.PAGE_SWITCH_BEFORE) {
         //e.data.hello = true;
         var from = e.data.from;
         var to = e.data.to;

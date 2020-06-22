@@ -19,7 +19,7 @@ export function goto(url, options) {
     return false;
   }
 
-  var current = document.querySelector(".lazypage.in");
+  var current = document.querySelector(".lazyswitch.in");
   if (current == null) return;
 
   options = options || {};

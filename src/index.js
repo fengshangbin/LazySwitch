@@ -1,4 +1,4 @@
-import "./css/lazypage.less";
+import "./css/lazyswitch.less";
 import "./lib/default";
 export { goto } from "./lib/route";
 export {

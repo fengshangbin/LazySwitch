@@ -41,7 +41,7 @@ ready(function () {
   var targetPath = getPath(location.href);
   var targetLazyPage = getElementByPath(targetPath);
 
-  var currentLazyPage = document.querySelector(".lazypage.in") || document.querySelector(".lazypage");
+  var currentLazyPage = document.querySelector(".lazyswitch.in") || document.querySelector(".lazyswitch");
 
   if (targetLazyPage == null && currentLazyPage == null) return;
   else {
