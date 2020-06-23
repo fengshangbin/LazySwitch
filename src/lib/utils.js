@@ -1,3 +1,12 @@
+if (typeof String.prototype.startsWith !== 'function') {
+    String.prototype.startsWith = function(prefix) {
+        return this.slice(0, prefix.length) === prefix;
+    };
+    String.prototype.endsWith = function(suffix) {
+        return this.indexOf(suffix, this.length - suffix.length) !== -1;
+    };
+}
+
 Element.prototype.getParentElementByTag = function (tag) {
   if (!tag) return null;
   var element = null,

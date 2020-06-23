@@ -5,7 +5,8 @@ export function getElementByPath(path) {
 }
 
 export function setElementPath(element, path) {
-  element.setAttribute("data-path", replacePath(path));
+  if (!element.hasAttribute("data-path"))
+    element.setAttribute("data-path", replacePath(path));
 }
 
 export function setIgnorePath(_ignorePath) {

@@ -95,6 +95,10 @@ export function loadPage(url, callback) {
         url: url,
         success: function (data) {
             targetPage = querySelectorElement(data, ".lazyswitch[data-path=\"" + targetPath + "\"]", false);
+            if(targetPage == null){
+                if(targetPath.endsWith("index.html")) targetPage = querySelectorElement(data, ".lazyswitch[data-path=\"" + targetPath.replace("index.html", "") + "\"]", false);
+                else if(targetPath.endsWith("/")) targetPage = querySelectorElement(data, ".lazyswitch[data-path=\"" + targetPath+"index.html"+ "\"]", false);
+            }
             if (targetPage == null) {
                 targetPage = querySelectorElement(data, ".lazyswitch.in", false) || querySelectorElement(data, ".lazyswitch", false);
             }
