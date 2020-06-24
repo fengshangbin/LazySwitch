@@ -36,6 +36,15 @@ LazySwitch 是一个 js 插件，实现页面切换的各种动画。
 <script src="js/lazyswitch.js"></script>
 ```
 
+或者npm导入
+```
+npm install --save lazyswitch
+
+...
+
+import "lazyswitch";
+```
+
 给执行切换动画的单元添加 class="lazyswitch"
 
 ```
