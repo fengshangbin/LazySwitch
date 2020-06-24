@@ -40,10 +40,6 @@ window.onpopstate = function () {
 ready(function () {
   var targetPath = getPath(location.href);
   var targetLazyPage = getElementByPath(targetPath);
-  if(targetLazyPage == null){
-    if(targetPath.endsWith("index.html")) targetLazyPage = getElementByPath(targetPath.replace("index.html", ""));
-    else if(targetPath.endsWith("/")) targetLazyPage = getElementByPath(targetPath+"index.html");
-  }
 
   var currentLazyPage = document.querySelector(".lazyswitch.in") || document.querySelector(".lazyswitch");
 

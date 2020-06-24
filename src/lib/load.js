@@ -2,7 +2,7 @@ import ajax from "./ajax.js";
 import analyzeScript from "./analyzeScript";
 import { querySelectorElement } from "./queryhelp";
 import { getPath, getRealUrl, getDomain } from "./utils";
-import { getElementByPath, setElementPath } from "./element";
+import { getElementByPath, getDataElementByPath, setElementPath } from "./element";
 import ready from "./documentReady";
 
 /* loading动画 */
@@ -94,11 +94,7 @@ export function loadPage(url, callback) {
     ajax({
         url: url,
         success: function (data) {
-            targetPage = querySelectorElement(data, ".lazyswitch[data-path=\"" + targetPath + "\"]", false);
-            if(targetPage == null){
-                if(targetPath.endsWith("index.html")) targetPage = querySelectorElement(data, ".lazyswitch[data-path=\"" + targetPath.replace("index.html", "") + "\"]", false);
-                else if(targetPath.endsWith("/")) targetPage = querySelectorElement(data, ".lazyswitch[data-path=\"" + targetPath+"index.html"+ "\"]", false);
-            }
+            targetPage = getDataElementByPath(data, targetPath);
             if (targetPage == null) {
                 targetPage = querySelectorElement(data, ".lazyswitch.in", false) || querySelectorElement(data, ".lazyswitch", false);
             }
