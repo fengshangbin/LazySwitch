@@ -1,10 +1,10 @@
 if (typeof String.prototype.startsWith !== 'function') {
-    String.prototype.startsWith = function(prefix) {
-        return this.slice(0, prefix.length) === prefix;
-    };
-    String.prototype.endsWith = function(suffix) {
-        return this.indexOf(suffix, this.length - suffix.length) !== -1;
-    };
+  String.prototype.startsWith = function (prefix) {
+    return this.slice(0, prefix.length) === prefix;
+  };
+  String.prototype.endsWith = function (suffix) {
+    return this.indexOf(suffix, this.length - suffix.length) !== -1;
+  };
 }
 
 Element.prototype.getParentElementByTag = function (tag) {
@@ -170,7 +170,7 @@ export function changeTitle(title) {
 }
 
 var domain = location.origin;
-if (domain == undefined) domain = /^((https|http|ftp|rtsp|mms)?:\/\/[^/]*)/i.exec(location.href)[0];
+if (domain == undefined) domain = /^((https|http|ftp|rtsp|mms|file)?:\/\/[^/]*)/i.exec(location.href)[0];
 
 export function getDomain() {
   return domain;
@@ -195,6 +195,7 @@ export function getRealUrl(url) {
       return domain + url;
     } else if (url.startsWith('../')) {
       var paths = getPaths(location.href);
+      paths.pop();
       var count = 0;
       while (url.startsWith('../')) {
         url = url.substring(3);
@@ -207,12 +208,15 @@ export function getRealUrl(url) {
       if (pathBuffer.length > 1) pathBuffer += '/';
       return domain + pathBuffer + url;
     } else {
-      throw domain + "/" + url;
+      var paths = getPaths(location.href);
+      paths.pop();
+      return domain + "/" + paths.join("/") + url;
+      //throw domain + "/" + url;
     }
   }
 }
 function checkUrl(url) {
-  var regex = '^((https|http|ftp|rtsp|mms)?://)(.*?)';
+  var regex = '^((https|http|ftp|rtsp|mms|file)?://)(.*?)';
   var pattern = new RegExp(regex, 'i');
   return pattern.test(url);
 }
