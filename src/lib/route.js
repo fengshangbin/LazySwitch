@@ -31,16 +31,18 @@ export function goto(url, options) {
 
   var target = getElementByPath(targetPath);
   if (target == null) {
-    loadPage(url, function (addedLazyPage) {
-      if (addedLazyPage == null) {
-        location.href = url;
-        return true;
-      }
-      target = addedLazyPage;
-      removeLoading(current);
-      transition(targetPath, current, target, options);
-    });
     addLoading(current);
+    loadPage(url, function (addedLazyPage, returnURL) {
+      if (returnURL == url) {
+        if (addedLazyPage == null) {
+          location.href = url;
+          return true;
+        }
+        target = addedLazyPage;
+        removeLoading(current);
+        transition(targetPath, current, target, options);
+      }
+    });
   } else if (target != current) {
     transition(targetPath, current, target, options);
   }

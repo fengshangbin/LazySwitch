@@ -177,8 +177,7 @@ export function getDomain(url) {
 
 export function getPath(url) {
   var domain = getDomain(url);
-  return url.replace(new RegExp(domain, 'i'), '').replace(/(\?.*)|(#.*)/, '')
-    .replace(/\/\//g, '/');
+  return url.replace(new RegExp(domain, 'i'), '').replace(/(\?.*)|(#.*)/, '').replace(/\/\//g, '/');
 }
 
 function getPaths(url) {
