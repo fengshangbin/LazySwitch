@@ -8,11 +8,14 @@ export var lastPath = getPath(location.href);
 
 var supportHistory = "pushState" in history && "replaceState" in history;
 
+var targetURL;
+
 export function goto(url, options) {
   if (!supportHistory) {
     return false;
   }
   url = getRealUrl(url);
+  targetURL = url;
 
   var targetPath = getPath(url);
   if (/^https?:\//i.test(targetPath)) {
@@ -32,8 +35,10 @@ export function goto(url, options) {
   var target = getElementByPath(targetPath);
   if (target == null) {
     addLoading(current);
-    loadPage(url, function (addedLazyPage, returnURL) {
-      if (returnURL == url) {
+    //console.log("start url: " + url);
+    loadPage(url, function (addedLazyPage) {
+      //console.log("ok: " + url, "target: " + targetURL);
+      if (targetURL == url) {
         if (addedLazyPage == null) {
           location.href = url;
           return true;

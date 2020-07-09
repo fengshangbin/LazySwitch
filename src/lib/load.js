@@ -147,7 +147,7 @@ export function loadPage(url, callback) {
 function loadPageCallback(key, lazyswitch) {
     var callbacks = ajaxPageHistory[key];
     for (var i = 0; i < callbacks.length; i++) {
-        if (callbacks[i]) callbacks[i](lazyswitch, key);
+        if (callbacks[i]) callbacks[i](lazyswitch);
     }
     ajaxPageHistory[key] = null;
 }
