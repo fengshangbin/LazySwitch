@@ -169,33 +169,32 @@ export function changeTitle(title) {
   }
 }
 
-var domain = location.origin;
-if (domain == undefined) domain = /^((https|http|ftp|rtsp|mms|file)?:\/\/[^/]*)/i.exec(location.href)[0];
-
-export function getDomain() {
-  return domain;
+export function getDomain(url) {
+  if (url == null) return location.origin;
+  var group = /^((https|http|ftp|rtsp|mms|file)?:\/\/[^/]*)/i.exec(url);
+  return group ? group[0] : null;
 }
 
 export function getPath(url) {
+  var domain = getDomain(url);
   return url.replace(new RegExp(domain, 'i'), '').replace(/(\?.*)|(#.*)/, '')
-    //.replace(/^\//, '')
     .replace(/\/\//g, '/');
 }
 
 function getPaths(url) {
-  var paths = getPath(url).split('/');
-  if (paths[0] == "") paths.shift();
+  var paths = getPath(url).replace(/^\//, '').split('/');
   return paths;
 }
 
-export function getRealUrl(url) {
-  if (checkUrl(url)) return url;
+function getFinalURL(currentURL, targetURL) {
+  if (checkUrl(targetURL)) return targetURL;
   else {
-    if (url.startsWith('/')) {
-      return domain + url;
+    var domain = getDomain(url);
+    var paths = getPaths(currentURL);
+    paths.pop();
+    if (targetURL.startsWith('/')) {
+      return domain + targetURL;
     } else if (url.startsWith('../')) {
-      var paths = getPaths(location.href);
-      paths.pop();
       var count = 0;
       while (url.startsWith('../')) {
         url = url.substring(3);
@@ -208,12 +207,13 @@ export function getRealUrl(url) {
       if (pathBuffer.length > 1) pathBuffer += '/';
       return domain + pathBuffer + url;
     } else {
-      var paths = getPaths(location.href);
-      paths.pop();
       return domain + "/" + paths.join("/") + url;
-      //throw domain + "/" + url;
     }
   }
+}
+
+export function getRealUrl(url) {
+  return getFinalURL(location.href, url);
 }
 function checkUrl(url) {
   var regex = '^((https|http|ftp|rtsp|mms|file)?://)(.*?)';
