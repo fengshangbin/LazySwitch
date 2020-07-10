@@ -188,25 +188,19 @@ function getPaths(url) {
 function getFinalURL(currentURL, targetURL) {
   if (checkUrl(targetURL)) return targetURL;
   else {
-    var domain = getDomain(url);
+    var domain = getDomain(currentURL);
     var paths = getPaths(currentURL);
     paths.pop();
     if (targetURL.startsWith('/')) {
       return domain + targetURL;
-    } else if (url.startsWith('../')) {
-      var count = 0;
-      while (url.startsWith('../')) {
-        url = url.substring(3);
-        count++;
+    } else if (targetURL.startsWith('../')) {
+      while (targetURL.startsWith('../')) {
+        targetURL = targetURL.substring(3);
+        paths.pop();
       }
-      var pathBuffer = '/';
-      for (var i = 0; i < paths.length - count; i++) {
-        pathBuffer += paths[i];
-      }
-      if (pathBuffer.length > 1) pathBuffer += '/';
-      return domain + pathBuffer + url;
+      return domain + "/" + paths.join("/") + (paths.length > 0 ? "/" : "") + targetURL;
     } else {
-      return domain + "/" + paths.join("/") + url;
+      return domain + "/" + paths.join("/") + (paths.length > 0 ? "/" : "") + targetURL;
     }
   }
 }
