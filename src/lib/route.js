@@ -1,5 +1,5 @@
 import { push } from "./history";
-import { getPath, getRealUrl, changeTitle, extend } from "./utils";
+import { getDomain, getPath, getRealUrl, changeTitle, extend } from "./utils";
 import { pageAnimate } from "./animate";
 import { getElementByPath } from "./element";
 import { addLoading, removeLoading, checkPreLoad, loadPage } from "./load"
@@ -15,12 +15,13 @@ export function goto(url, options) {
     return false;
   }
   url = getRealUrl(url);
-  targetURL = url;
-
-  var targetPath = getPath(url);
-  if (/^https?:\//i.test(targetPath)) {
+  url = url.replace(new RegExp(getDomain(), 'i'), '');
+  if (/^https?:\/\//i.test(url)) {
     return false;
   }
+
+  targetURL = url;
+  var targetPath = getPath(url);
 
   var current = document.querySelector(".lazyswitch.in");
   if (current == null) return;
